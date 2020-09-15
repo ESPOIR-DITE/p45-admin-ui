@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="990.0" style="-fx-border-color: #202142;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Button layoutX="8.0" layoutY="105.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="130.0" text="Home" />
+      <Button layoutX="8.0" layoutY="145.0" mnemonicParsing="false" onAction="#party" prefHeight="25.0" prefWidth="130.0" text="Parties" />
+      <Button layoutX="8.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Location" />
+      <Button layoutX="8.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Result" />
+      <Button fx:id="exitbtn" layoutX="8.0" layoutY="264.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="130.0" text="Exit" />
+      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="47.0" prefWidth="990.0" style="-fx-border-color: #202142;">
+         <children>
+            <Label layoutX="386.0" layoutY="15.0" text="P45 EVOTING SYSTEM Admin" />
+         </children>
+      </Pane>
+      <PieChart fx:id="chart3" layoutX="766.0" layoutY="113.0" prefHeight="157.0" prefWidth="200.0" />
+      <LineChart fx:id="chart2" layoutX="458.0" layoutY="105.0" prefHeight="182.0" prefWidth="268.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <BarChart fx:id="chart1" layoutX="186.0" layoutY="104.0" prefHeight="182.0" prefWidth="240.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>
