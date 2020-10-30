@@ -3,15 +3,22 @@ package sample.controllers;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PartyController implements Initializable {
+    @FXML
+    private AnchorPane anchorPanel;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -36,5 +43,12 @@ public class PartyController implements Initializable {
     }
     public final javafx.stage.Stage getCurrentStage() {
         return this.currentStageProperty().get();
+    }
+
+    @FXML
+    private void cancelParty() throws IOException {
+        Pane rootPane1 = FXMLLoader.load(getClass().getResource("view/partyform.fxml"));
+        rootPane1.getChildren().remove(rootPane1);
+
     }
 }

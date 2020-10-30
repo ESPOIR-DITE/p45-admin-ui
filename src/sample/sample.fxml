@@ -1,37 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane fx:id="anchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="990.0" style="-fx-border-color: #202142;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <children>
-      <Button layoutX="8.0" layoutY="105.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="130.0" text="Home" />
-      <Button layoutX="8.0" layoutY="145.0" mnemonicParsing="false" onAction="#party" prefHeight="25.0" prefWidth="130.0" text="Parties" />
-      <Button layoutX="8.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Location" />
-      <Button layoutX="8.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Result" />
-      <Button fx:id="exitbtn" layoutX="8.0" layoutY="264.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="130.0" text="Exit" />
-      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="47.0" prefWidth="990.0" style="-fx-border-color: #202142;">
-         <children>
-            <Label layoutX="386.0" layoutY="15.0" text="P45 EVOTING SYSTEM Admin" />
-         </children>
-      </Pane>
-      <PieChart fx:id="chart3" layoutX="766.0" layoutY="113.0" prefHeight="157.0" prefWidth="200.0" />
-      <LineChart fx:id="chart2" layoutX="458.0" layoutY="105.0" prefHeight="182.0" prefWidth="268.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-      <BarChart fx:id="chart1" layoutX="186.0" layoutY="104.0" prefHeight="182.0" prefWidth="240.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
-   </children>
+<AnchorPane fx:id="anchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="990.0" style="-fx-border-color: #202142;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+        <Button layoutX="8.0" layoutY="105.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="130.0" text="Home" />
+        <Button layoutX="8.0" layoutY="145.0" mnemonicParsing="false" onAction="#party" prefHeight="25.0" prefWidth="130.0" text="Parties" />
+        <Button layoutX="8.0" layoutY="183.0" mnemonicParsing="false" onAction="#location" prefHeight="25.0" prefWidth="130.0" text="Location" />
+        <Button layoutX="8.0" layoutY="255.0" mnemonicParsing="false" onAction="#result" prefHeight="25.0" prefWidth="130.0" text="Result" />
+        <Button fx:id="exitbtn" layoutX="8.0" layoutY="291.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="130.0" text="Exit" />
+        <Button layoutX="8.0" layoutY="219.0" mnemonicParsing="false" onAction="#voterPanel" prefHeight="25.0" prefWidth="130.0" text="Voter" />
+        <Pane layoutX="1.0" layoutY="-1.0" prefHeight="47.0" prefWidth="990.0" style="-fx-border-color: #202142;">
+            <children>
+                <Label layoutX="386.0" layoutY="15.0" text="P45 EVOTING SYSTEM Admin" />
+            </children>
+        </Pane>
+
+    <Pane fx:id="homePanel" layoutX="148.0" layoutY="106.0" prefHeight="313.0" prefWidth="827.0" style="-fx-background-color: #ffff;" visible="true">
+    <children>
+        <PieChart fx:id="chart3" layoutX="604.0" layoutY="74.0" prefHeight="157.0" prefWidth="200.0" />
+        <LineChart fx:id="chart2" layoutX="296.0" layoutY="66.0" prefHeight="182.0" prefWidth="268.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </LineChart>
+        <BarChart fx:id="chart1" layoutX="24.0" layoutY="65.0" prefHeight="182.0" prefWidth="240.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </BarChart>
+    </children>
+    </Pane>
+
+        <Pane fx:id="partyPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;" visible="false">
+            <children>
+                <TextField fx:id="partyName" layoutX="162.0" layoutY="79.0" prefHeight="25.0" prefWidth="370.0" promptText="Party Name" />
+                <TextField fx:id="abbviation" layoutX="163.0" layoutY="132.0" prefHeight="25.0" prefWidth="370.0" promptText="Abbreviation" />
+                <Button fx:id="addPartyBtn" layoutX="321.0" layoutY="267.0" mnemonicParsing="false" onAction="#addParty" text="Add Party" />
+                <Label fx:id="newParty" layoutX="333.0" layoutY="32.0" text="New Party" />
+                <Button layoutX="162.0" layoutY="186.0" mnemonicParsing="false" onAction="#openFileExplore" prefHeight="25.0" prefWidth="370.0" text="flag" />
+              <Pane fx:id="notificationPanel" layoutX="153.0" layoutY="125.0" prefHeight="173.0" prefWidth="390.0" style="-fx-background-color: #ffff;" visible="false">
+                  <children>
+                      <Button fx:id="notificationBTN" layoutX="183.0" layoutY="124.0" mnemonicParsing="false" onAction="#removeNotificationPanel" text="Ok" />
+                      <Label fx:id="notificationText" contentDisplay="CENTER" layoutX="120.0" layoutY="39.0" prefHeight="17.0" prefWidth="122.0" text="       Attention Error!!" textAlignment="CENTER" wrapText="true" />
+                  <Label fx:id="notificationContent" layoutX="192.0" layoutY="78.0" />
+                  </children>
+              </Pane>
+            </children>
+        </Pane>
+
+        <!-- New voter    -->
+        <Pane fx:id="locationPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;" visible="false">
+            <children>
+                <TextField fx:id="locationName" layoutX="163.0" layoutY="92.0" prefHeight="25.0" prefWidth="370.0" promptText="location Name" />
+                <TextField fx:id="locationType" layoutX="163.0" layoutY="138.0" prefHeight="25.0" prefWidth="370.0" promptText="location Type" />
+                <TextField fx:id="parentLocation" layoutX="163.0" layoutY="187.0" prefHeight="25.0" prefWidth="370.0" promptText="parent location" />
+                <Button fx:id="addLocationBtn" layoutX="300.0" layoutY="266.0" mnemonicParsing="false" text="Add a Location" />
+                <Label fx:id="newLocation" layoutX="312.0" layoutY="45.0" text="New Location" />
+            </children>
+        </Pane>
+        <!-- New voter    -->
+        <Pane fx:id="voterPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;" visible="false">
+            <children>
+                <TextField fx:id="voterName" layoutX="163.0" layoutY="66.0" prefHeight="25.0" prefWidth="370.0" promptText="Name" />
+                <TextField fx:id="lastName" layoutX="163.0" layoutY="113.0" prefHeight="25.0" prefWidth="370.0" promptText="Last Name" />
+                <TextField fx:id="idNumber" layoutX="163.0" layoutY="158.0" prefHeight="25.0" prefWidth="370.0" promptText="ID Number" />
+                <Label fx:id="newVoter" layoutX="320.0" layoutY="14.0" text="New Voter" />
+                <Button fx:id="addVoterBtn" layoutX="327.0" layoutY="274.0" mnemonicParsing="false" onAction="#createNewVoter" text="Add a Voter" />
+                <TextField fx:id="phoneNumber" layoutX="163.0" layoutY="203.0" prefHeight="25.0" prefWidth="370.0" promptText="Phone Number"  />
+            <Button layoutX="341.0" layoutY="237.0" mnemonicParsing="false" onAction="#openWebCamCapture" text="Picture" visible="false" />
+            </children>
+        </Pane>
+
+
+        <TableView fx:id="resultTable" layoutX="196.0" layoutY="104.0" prefHeight="230.0" prefWidth="544.0" visible="false">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Party" />
+                <TableColumn prefWidth="134.0" text="Province" />
+                <TableColumn prefWidth="131.0" text="Result" />
+                <TableColumn prefWidth="113.0" text="C2" />
+            </columns>
+        </TableView>
+
+
+    </children>
 </AnchorPane>

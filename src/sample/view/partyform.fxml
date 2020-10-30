@@ -3,10 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.PartyController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#cancelParty" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.PartyController">
    <children>
       <TextField layoutX="191.0" layoutY="104.0" prefHeight="25.0" prefWidth="258.0" />
       <TextField layoutX="191.0" layoutY="153.0" prefHeight="25.0" prefWidth="258.0" />
       <Button layoutX="192.0" layoutY="200.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="258.0" text="select flag" />
+      <Button layoutX="194.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="258.0" text="Submit" />
+      <Button layoutX="194.0" layoutY="286.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="258.0" text="Cancel" />
    </children>
 </Pane>
