@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="990.0" style="-fx-border-color: #202142;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="anchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="990.0" style="-fx-border-color: #202142;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <Button layoutX="8.0" layoutY="105.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="130.0" text="Home" />
       <Button layoutX="8.0" layoutY="145.0" mnemonicParsing="false" onAction="#party" prefHeight="25.0" prefWidth="130.0" text="Parties" />
       <Button layoutX="8.0" layoutY="183.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Location" />
       <Button layoutX="8.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Result" />
       <Button fx:id="exitbtn" layoutX="8.0" layoutY="264.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="130.0" text="Exit" />
-      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="47.0" prefWidth="990.0" style="-fx-border-color: #202142;">
+      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="47.0" prefWidth="990.0" style="-fx-border-color: #202142; -fx-background-color: white;">
          <children>
-            <Label layoutX="386.0" layoutY="15.0" text="P45 EVOTING SYSTEM Admin" />
+            <Label layoutX="328.0" layoutY="6.0" text="P45 EVOTING SYSTEM Admin">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font></Label>
          </children>
       </Pane>
       <PieChart fx:id="chart3" layoutX="766.0" layoutY="113.0" prefHeight="157.0" prefWidth="200.0" />
