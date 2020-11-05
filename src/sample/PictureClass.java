@@ -3,6 +3,8 @@ package sample;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
+import com.github.sarxos.webcam.WebcamUtils;
+import org.apache.commons.io.FileUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,9 +16,14 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-public class PictureClass  extends  Thread{
+public class PictureClass {
     private String fileName = Paths.get("").toAbsolutePath().toString()+"output.jpg";
     private File file_save_path = new File(fileName);
+    byte[] bytes;
+
+    public byte[] getBytes(){
+        return bytes;
+    }
 
     public void run(){
 
@@ -47,20 +54,10 @@ public class PictureClass  extends  Thread{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     jButton.setVisible(false);
-                    //webcam.close();
-                    //webcam.
 
-//                    Webcam webcam1 = Webcam.getDefault();
-//                    webcam1.open();
+                    bytes = WebcamUtils.getImageBytes(webcam, "jpg");
+                    //System.out.println("Byte in Picture: "+bytes);
 
-                    // get image
-                    BufferedImage image = webcam.getImage();
-
-                    try {
-                        ImageIO.write(image, "JPG", new File("glory.jpg"));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
                     window.dispose();
                     webcam.close();
                 }

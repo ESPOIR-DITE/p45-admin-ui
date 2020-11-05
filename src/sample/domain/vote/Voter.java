@@ -1,5 +1,7 @@
 package sample.domain.vote;
 
+import java.io.File;
+
 public class Voter {
     private String id;
     private String name;

@@ -2,6 +2,7 @@ package sample.util;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.Base64;
@@ -26,7 +27,7 @@ public class ImageService {
         ImageIO.write(bImage2, "JPG", file_save_path);
         System.out.println("image created");
     }
-    public byte[] convertToBytes() throws IOException {
+    public byte[] convertToBytes(File file) throws IOException {
         FileInputStream fis = new FileInputStream(file_read_path);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
@@ -44,7 +45,37 @@ public class ImageService {
 
     public byte[] encodeIntoByteArray(byte[] image) {
         String encodedString = Base64.getEncoder().encodeToString(image);
-        byte[] byteArrray = encodedString.getBytes();
-        return byteArrray;
+        return encodedString.getBytes();
+    }
+
+    public Boolean checkFileExtension(File file){
+        String extension = "";
+        try{
+            if(file.exists()){
+                String name = file.getName();
+                extension = name.substring(name.lastIndexOf("."));
+                System.out.println("extention :"+extension);
+            }
+        }catch (Exception e){
+            System.out.println("Exception");
+            extension = "";
+        }
+        if(!extension.equals("")){
+            if(extension.equals(".jpg")||extension.equals(".jpeg")){
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * this method convert BufferedImage into byteArray.
+     * @param bufferedImage
+     * @return
+     */
+    public byte[] convertBufferedImage(BufferedImage bufferedImage){
+        BufferedImage image = new BufferedImage(bufferedImage.getWidth(),bufferedImage.getHeight(),bufferedImage.TYPE_3BYTE_BGR);
+        return encodeIntoByteArray(((DataBufferByte) image.getRaster().getDataBuffer()).getData());
     }
 }

@@ -18,18 +18,17 @@ public class ImageResizer {
     /**
      * Resizes an image to a absolute width and height (the image may not be
      * proportional)
-     * @param inputImagePath Path of the original image
      * @param scaledWidth absolute width in pixels
      * @param scaledHeight absolute height in pixels
      * @throws IOException
      */
 
 
-    public static void resize(String inputImagePath, int scaledWidth, int scaledHeight) throws IOException {
+    public static BufferedImage resize(File file, int scaledWidth, int scaledHeight) throws IOException {
         // reads input image
         //ClassLoader classLoader = new ImageResizer().getClass().getClassLoader();
         //File file = new File(classLoader.getResource(inputImagePath).getFile());
-        File file = new File(inputImagePath);
+        //File file = new File(inputImagePath);
 
         //File inputFile = new File(inputImagePath);
         BufferedImage inputImage = ImageIO.read(file);
@@ -46,43 +45,43 @@ public class ImageResizer {
         //String formatName = outputImagePath.substring(outputImagePath.lastIndexOf(".") + 1);
 
         // writes to output file
-        String fileName1 = Paths.get("").toAbsolutePath().toString()+"resized.jpg";
-        File inputFile = new File(fileName1);
-        //File inputFile = new File("src/main/java/company/ac/za/studentbookstore/util/resized.jpg");
+//        String fileName1 = Paths.get("").toAbsolutePath().toString()+"resized.jpg";
+//        File inputFile = new File(fileName1);
+//        //File inputFile = new File("src/main/java/company/ac/za/studentbookstore/util/resized.jpg");
 
-        if(inputFile != null){
-            //File f = new File(url.getFile());
-            System.out.println(inputFile.getPath());
-            ImageIO.write(outputImage, "jpg", inputFile);
-        }
+//        if(inputFile != null){
+//            //File f = new File(url.getFile());
+//            System.out.println(inputFile.getPath());
+//            ImageIO.write(outputImage, "jpg", inputFile);
+//        }
         //File file1 = new File(dir+"resized.jpeg");
+        return outputImage;
     }
 
     /**
      * Resizes an image by a percentage of original size (proportional).
-     * @param inputImagePath Path of the original image
      * @param percent a double number specifies percentage of the output image
      * over the input image.
      * @throws IOException
      */
-    public static void resize(String inputImagePath, double percent) throws IOException {
+    public static BufferedImage resize(File inputFile, double percent) throws IOException {
         //ClassLoader classLoader = new ImageResizer().getClass().getClassLoader();
-        File inputFile = new File(inputImagePath);
+        //File inputFile = new File(inputImagePath);
 
         //File inputFile = new File(inputImagePath);
         BufferedImage inputImage = ImageIO.read(inputFile);
         int scaledWidth = (int) (inputImage.getWidth() * percent);
         int scaledHeight = (int) (inputImage.getHeight() * percent);
-        resize(inputImagePath, scaledWidth, scaledHeight);
+         return resize(inputFile, scaledWidth, scaledHeight);
     }
 
     /**
      * Test resizing images
      */
-    public static void getResizedImage() throws IOException {
-        String fileName = Paths.get("").toAbsolutePath().toString()+"output.jpg";
-       // ClassLoader classLoader = new ImageResizer().getClass().getClassLoader();
-        File file = new File(Paths.get("").toAbsolutePath().toString()+"output.jpg");
+    public static BufferedImage getResizedImage(File file) throws IOException {
+//        String fileName = Paths.get("").toAbsolutePath().toString()+"output.jpg";
+//       // ClassLoader classLoader = new ImageResizer().getClass().getClassLoader();
+//        File file = new File(Paths.get("").toAbsolutePath().toString()+"output.jpg");
 
         BufferedImage bimg = ImageIO.read(file);
         System.out.println(bimg.getWidth()+"<<<width||height>>>>"+bimg.getHeight());
@@ -91,7 +90,7 @@ public class ImageResizer {
         if(bimg.getWidth()>=5000){
             try{
                  percent = 0.16;
-                ImageResizer.resize(fileName, percent);
+                return ImageResizer.resize(file, percent);
             } catch (IOException ex) {
             System.out.println("Error resizing the image.");
             ex.printStackTrace();
@@ -100,7 +99,7 @@ public class ImageResizer {
         }else if(bimg.getWidth()>=3000){
             try{
                 percent = 0.27;
-                ImageResizer.resize(fileName, percent);
+                return ImageResizer.resize(file, percent);
             } catch (IOException ex) {
                 System.out.println("Error resizing the image.");
                 ex.printStackTrace();
@@ -108,7 +107,7 @@ public class ImageResizer {
         }else if(bimg.getWidth()>=1000){
             try {
                 percent = 0.8;
-                ImageResizer.resize(fileName, percent);
+                return ImageResizer.resize(file, percent);
             } catch (IOException ex) {
                 System.out.println("Error resizing the image.");
                 ex.printStackTrace();
@@ -116,11 +115,12 @@ public class ImageResizer {
         }else
             try {
                 percent = 1;
-                ImageResizer.resize(fileName,  percent);
+               return ImageResizer.resize(file,  percent);
             } catch (IOException ex) {
                 System.out.println("Error resizing the image.");
                 ex.printStackTrace();
             }
+            return null;
     }
 
     public static void getAbsolutDir(){

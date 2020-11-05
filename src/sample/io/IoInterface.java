@@ -10,7 +10,7 @@ public interface IoInterface<T,t> {
     int update(T t) throws IOException;
     T read(String id) throws IOException;
     Boolean delete(String id);
-    String readAll();
+    String readAll() throws IOException;
     Long count();
 
 }

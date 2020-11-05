@@ -3,16 +3,16 @@ package sample.domain.user;
 public class Party {
     private String id;
     private String name;
-    private String description;
+    private String abbreviation;
     private byte[] flag;
 
     public Party() {
     }
 
-    public Party(String id, String name, String description,byte[] flag) {
+    public Party(String id, String name, String abbreviation, byte[] flag) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.abbreviation = abbreviation;
         this.flag = flag;
     }
 
@@ -40,11 +40,11 @@ public class Party {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAbbreviation() {
+        return abbreviation;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 }

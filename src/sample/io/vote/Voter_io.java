@@ -84,4 +84,6 @@ public class Voter_io implements IoInterface<Voter, Integer> {
         ResponseEntity<Long> response = restTemplate.getForEntity(deleteURL, Long.class);
         return response.getBody();
     }
+
+
 }
