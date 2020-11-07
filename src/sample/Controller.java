@@ -15,9 +15,11 @@ import javafx.scene.layout.Pane;
 //import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import org.apache.commons.io.FileUtils;
+import sample.domain.admin.Admin;
 import sample.domain.user.Party;
 import sample.domain.vote.Voter;
 import sample.factory.VoterFactory;
+import sample.io.admin.AdminIO;
 import sample.io.user.PartyIO;
 import sample.io.vote.NewVoteIo;
 import sample.io.vote.VoteResult;
@@ -130,12 +132,42 @@ public class Controller implements Initializable {
     private ListView myListView;
     @FXML
     private ListView resultListView;
+    @FXML
+    private ListView adminListView;
+    @FXML
+    private Pane loginPane;
+    @FXML
+    private Pane sidebarPane;
+    @FXML
+    private Button superAdminPower;
+    @FXML
+    private Pane adminPane;
+
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField password;
+
+    @FXML
+    private  TextField adminName;
+    @FXML
+    private TextField adminemail;
+    @FXML
+    private TextField adminpassword;
+    @FXML
+    private TextField adminRole;
+    @FXML
+    private Pane adminTable;
 
     private byte[] resized;
 
     private byte[] partyImageReservior;
 
+    @FXML
+    private PasswordField passwordPassword;
+
     PictureClass myThread = new PictureClass();
+    AdminIO adminIO = AdminIO.getAdminIO();
 
     private String fileName = Paths.get("").toAbsolutePath().toString()+"output.jpg";
     private File file_save_path = new File(fileName);
@@ -151,6 +183,29 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+    }
+    @FXML
+    public void logIn(){
+        String emailString = email.getText();
+        String passwordString = passwordPassword.getText();
+
+        System.out.println("The password: "+passwordString);
+        if(emailString.equals("")||passwordString.equals("")){
+            showNotification("Login details missing!","Login Error","error");
+        }else {
+            Boolean result = adminIO.logIn(emailString,passwordString);
+            if(result){
+
+                if(adminIO.superLogIn(emailString,passwordString)){
+                    superAdminPower.setVisible(true);
+                }
+                sidebarPane.setVisible(true);
+                panelVisibility("home");
+            }else {
+                showNotification("Password or Email wrong Please verify!","Login Error","error");
+            }
+        }
 
     }
 
@@ -181,6 +236,24 @@ public class Controller implements Initializable {
     /***
      * This part deals with methods that calls panels
      */
+    @FXML
+    private void adminList() throws IOException {
+
+        List<String> partyString = new ArrayList<>();
+
+        for(Admin party:  adminIO.readAllX()){
+            partyString.add(party.toString());
+        }
+        //ListView<String> list = new ListView<String>();
+        ObservableList<String> items = FXCollections.observableArrayList (partyString);
+
+        //list.setItems(items);
+
+        adminListView.setItems(items);
+        adminListView.setOrientation(Orientation.VERTICAL);
+
+        panelVisibility("admin-list");
+    }
     @FXML
     private void home() throws IOException {
         panelVisibility("home");
@@ -224,15 +297,56 @@ public class Controller implements Initializable {
         panelVisibility("edit-party");
     }
 
+    @FXML
+    private void adminPanel(){
+        adminName.setText("");
+        adminemail.setText("");
+        adminpassword.setText("");
+        adminRole.setText("");
+        panelVisibility("admin");
+    }
+
 
 
     /***
      * This part deals with methods that send data to the Api
      */
+
+
+    @FXML
+    public void createAdmin() {
+
+        String adminNameString = adminName.getText();
+        String adminEmailString = adminemail.getText();
+        String adminPassword = adminpassword.getText();
+        String adminRoleString = adminRole.getText();
+
+        if(!adminEmailString.equals("")&&!adminNameString.equals("")&&!adminPassword.equals("")&&!adminRoleString.equals("")){
+            Admin admin = new Admin(adminEmailString,adminNameString,adminPassword,adminRoleString);
+            try {
+                int statusCode = adminIO.create(admin);
+                if (statusCode == 200) {
+                    showNotification("Admin Created Successfully", "", "success");
+                } else {
+                    showNotification("Unknown Error", "Network Problem", "error");
+                }
+            }catch (IOException io){
+                showNotification("Unknown Error", "Network Problem", "error");
+            }
+        }else {
+            showNotification("Requested Field may be Empty!","Please fill the all requested.","error");
+        }
+        adminName.setText("");
+        adminemail.setText("");
+        adminpassword.setText("");
+        adminRole.setText("");
+    }
+
     @FXML
     private void fetchParty(){
         //partyComponent(false);
         partyEditName.setText("");
+        partyEditName.setVisible(false);
         System.out.println(" we are fetching the party");
         String pAbreviation = partyAbreviation.getText();
         if (pAbreviation!=null){
@@ -246,6 +360,7 @@ public class Controller implements Initializable {
         } else {
             showNotification("Request Field Empty!","Please fill the Party Abbreviation.","error");
         }
+        partyAbreviation.setText("");
     }
 
     public void partyComponent(Boolean stat){
@@ -274,6 +389,7 @@ public class Controller implements Initializable {
         else {
             showNotification("Request Field Empty!","Please fill the Party Abbreviation.","error");
         }
+        partyAbreviation.setText("");
     }
     @FXML
     private void requestPartyUpdate(){
@@ -301,6 +417,7 @@ public class Controller implements Initializable {
         else {
             showNotification("Request Field Empty!","Please fill the Party Abbreviation.","error");
         }
+        partyAbreviation.setText("");
     }
     @FXML
     public void viewParties() throws IOException {
@@ -336,6 +453,9 @@ public class Controller implements Initializable {
                 panelVisibility("party");
             }
         }
+        partyName.setText("");
+        partyName.setVisible(false);
+        abbviation.setText("");
     }
     @FXML
     private void createNewVoter() throws IOException {
@@ -361,10 +481,6 @@ public class Controller implements Initializable {
                     showNotification("error creating voter","Network or server error","error");
                 }else {
                     showNotification("You have successfully created new Voter","Name: "+name,"success");
-                    voterName.setText("");
-                    lastName.setText("");
-                    idNumber.setText("");
-                    phoneNumber.setText("");
                 }
             }else {
                 showNotification("error reading and writing the file"," FILE!","error");
@@ -373,6 +489,10 @@ public class Controller implements Initializable {
         }catch (IOException ex){
             showNotification("error reading and writing the file","","error");
         }
+        voterName.setText("");
+        lastName.setText("");
+        idNumber.setText("");
+        phoneNumber.setText("");
     }
 //    @FXML
 //    private void openFileExplore() throws IOException {
@@ -446,10 +566,11 @@ public class Controller implements Initializable {
             }else {
                 System.out.println(" Error has occured");
                 showNotification("You have successfully created a party","Party: "+pName,"success");
-                partyName.setText("");
-                abbviation.setText("");
+
             }
         }
+        partyName.setText("");
+        abbviation.setText("");
     }
 
 
@@ -485,6 +606,15 @@ public class Controller implements Initializable {
             case "view-parties": viewParty.setVisible(true);
                 System.out.println("in party view");
                 break;
+            case "log-in": loginPane.setVisible(true);
+                System.out.println("in login");
+                break;
+            case "admin": adminPane.setVisible(true);
+                System.out.println("in admin");
+                break;
+            case "admin-list": adminTable.setVisible(true);
+                System.out.println("in admin-list");
+                break;
         }
     }
 
@@ -498,6 +628,9 @@ public class Controller implements Initializable {
         partyEditPanel.setVisible(false);
         updatePanel.setVisible(false);
         viewParty.setVisible(false);
+        loginPane.setVisible(false);
+        adminPane.setVisible(false);
+        adminTable.setVisible(false);
     }
 
     @FXML
