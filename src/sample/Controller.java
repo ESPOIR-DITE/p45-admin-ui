@@ -360,7 +360,7 @@ public class Controller implements Initializable {
         } else {
             showNotification("Request Field Empty!","Please fill the Party Abbreviation.","error");
         }
-        partyAbreviation.setText("");
+
     }
 
     public void partyComponent(Boolean stat){
@@ -390,6 +390,7 @@ public class Controller implements Initializable {
             showNotification("Request Field Empty!","Please fill the Party Abbreviation.","error");
         }
         partyAbreviation.setText("");
+        partyEditName.setText("");
     }
     @FXML
     private void requestPartyUpdate(){
