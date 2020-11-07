@@ -1,15 +1,15 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 //import javafx.scene.media.MediaView;
@@ -19,13 +19,18 @@ import sample.domain.user.Party;
 import sample.domain.vote.Voter;
 import sample.factory.VoterFactory;
 import sample.io.user.PartyIO;
+import sample.io.vote.NewVoteIo;
+import sample.io.vote.VoteResult;
 import sample.io.vote.Voter_io;
 import sample.util.ImageService;
+import sample.util.MyNotification;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -65,7 +70,7 @@ public class Controller implements Initializable {
     @FXML
     private Label newLocation;
     @FXML
-    private TableView resultTable;
+    private Pane resultTable;
 
     @FXML
     private TextField voterName;
@@ -90,6 +95,8 @@ public class Controller implements Initializable {
     private Label notificationContent;
     @FXML
     private Pane voterPanel;
+    @FXML
+    private Pane viewParty;
 
     @FXML
     private Pane homePanel;
@@ -119,11 +126,12 @@ public class Controller implements Initializable {
     private Button deleteParty;
     @FXML
     private Button updatePartyBtn;
+    @FXML
+    private ListView myListView;
+    @FXML
+    private ListView resultListView;
 
     private byte[] resized;
-
-    @FXML
-     private Pane webCamPanel;
 
     private byte[] partyImageReservior;
 
@@ -160,7 +168,6 @@ public class Controller implements Initializable {
     }
 
     private void showNotification(String notificationMassage, String content,String notificationType){
-
         notificationPanel.setVisible(true);
         if(notificationType.equals("error"))notificationPanel.setStyle("-fx-background-color: #FFB6C1");
         else notificationPanel.setStyle("-fx-background-color: #90EE90");
@@ -189,8 +196,25 @@ public class Controller implements Initializable {
     }
     @FXML
     private void result() throws IOException {
+
+        NewVoteIo newVoteIo = new NewVoteIo();
+
+        List<String> partyString = new ArrayList<>();
+
+        for(VoteResult party:  newVoteIo.readResult()){
+            partyString.add(party.toString());
+        }
+        //ListView<String> list = new ListView<String>();
+        ObservableList<String> items = FXCollections.observableArrayList (partyString);
+
+        //list.setItems(items);
+
+        resultListView.setItems(items);
+        resultListView.setOrientation(Orientation.VERTICAL);
+
         panelVisibility("result");
     }
+
     @FXML
     private void location() throws IOException {
         panelVisibility("location");
@@ -278,6 +302,22 @@ public class Controller implements Initializable {
             showNotification("Request Field Empty!","Please fill the Party Abbreviation.","error");
         }
     }
+    @FXML
+    public void viewParties() throws IOException {
+        List<String> partyString = new ArrayList<>();
+
+        for(Party party:  partyIO.readAllX()){
+            partyString.add(party.toString());
+        }
+        //ListView<String> list = new ListView<String>();
+        ObservableList<String> items = FXCollections.observableArrayList (partyString);
+
+        myListView.setItems(items);
+        myListView.setOrientation(Orientation.VERTICAL);
+        panelVisibility("view-parties");
+    }
+
+   // resultListView
     @FXML
     private void updateParty() throws IOException {
         String pName = partyName.getText();
@@ -385,6 +425,9 @@ public class Controller implements Initializable {
             }catch (IOException ex){
                 showNotification("error reading and writing the file","","error");
             }
+        }else {
+            System.out.println(" Error has occured");
+            showNotification("error reading and writing the file"," Please select a jpg or jpeg","error");
         }
     }
     @FXML
@@ -396,10 +439,12 @@ public class Controller implements Initializable {
             Party party = new Party("",pName,pabbviation,resized);
             //Clearing the resized.
             resized=null;
+
             int result = partyIO.create(party);
             if (result !=200) {
                 showNotification("error creating party","Network or server error","error");
             }else {
+                System.out.println(" Error has occured");
                 showNotification("You have successfully created a party","Party: "+pName,"success");
                 partyName.setText("");
                 abbviation.setText("");
@@ -437,6 +482,9 @@ public class Controller implements Initializable {
             case "update-party": updatePanel.setVisible(true);
                 System.out.println("in party update");
                 break;
+            case "view-parties": viewParty.setVisible(true);
+                System.out.println("in party view");
+                break;
         }
     }
 
@@ -449,6 +497,7 @@ public class Controller implements Initializable {
         homePanel.setVisible(false);
         partyEditPanel.setVisible(false);
         updatePanel.setVisible(false);
+        viewParty.setVisible(false);
     }
 
     @FXML
