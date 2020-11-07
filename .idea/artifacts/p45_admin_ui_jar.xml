@@ -81,6 +81,7 @@
       <element id="library" level="project" name="Maven: org.springframework:spring-web:5.2.9.RELEASE" />
       <element id="library" level="project" name="Maven: org.xmlunit:xmlunit-core:2.6.4" />
       <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.25" />
+      <element id="dir-copy" path="$PROJECT_DIR$/jackson-all-1.9.0.jar" />
     </root>
   </artifact>
 </component>
