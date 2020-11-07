@@ -16,6 +16,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
+
 public class VoteIo implements IoInterface<Vote, String> {
     private static String voteURL= Api.getApi()+"vote/";
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -70,8 +71,6 @@ public class VoteIo implements IoInterface<Vote, String> {
         con.setRequestProperty("Content-type","application/json; utf-8");
         con.setRequestProperty("Accept","application/json");
         con.setDoOutput(true);
-
-
         System.out.println(con.getResponseMessage());
         return null;
     }

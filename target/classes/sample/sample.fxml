@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<!--Pane fx:id="notificationPanel" layoutX="219.0" layoutY="70.0" prefHeight="173.0" prefWidth="390.0" style="-fx-background-color: #ffff; -fx-background-position: center;">
+<children>
+    <Button fx:id="notificationBTN" layoutX="183.0" layoutY="124.0" mnemonicParsing="false" onAction="#removeNotificationPanel" text="Ok" />
+    <Label fx:id="notificationText" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="39.0" prefHeight="17.0" prefWidth="363.0" text="       Attention Error!!" textAlignment="JUSTIFY" wrapText="true" />
+    <Label fx:id="notificationContent" layoutX="192.0" layoutY="78.0" />
+</children>
+</Pane-->
+
+<AnchorPane fx:id="anchorPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="990.0" style="-fx-border-color: #202142; -fx-background-color: #04132D;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+
+    <!--        Notification panel-->
+
+
+    <children>
+
+        <Pane fx:id="sidebarPane" layoutX="1.0" layoutY="45.0" prefHeight="556.0" prefWidth="144.0" style="-fx-background-color: #ffff;" visible="false">
+            <children>
+                <Button layoutX="8.0" layoutY="105.0" mnemonicParsing="false" onAction="#home" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #F53022;" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button layoutX="8.0" layoutY="145.0" mnemonicParsing="false" onAction="#party" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #F53022;" text="Parties" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button layoutX="8.0" layoutY="183.0" mnemonicParsing="false" onAction="#location" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #F53022;" text="Location" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button layoutX="8.0" layoutY="255.0" mnemonicParsing="false" onAction="#result" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #F53022;" text="Result" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button fx:id="exitbtn" layoutX="8.0" layoutY="291.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #fcbb31;" text="Exit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button layoutX="8.0" layoutY="219.0" mnemonicParsing="false" onAction="#voterPanel" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #F53022;" text="Voter" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+                <Button fx:id="superAdminPower" layoutX="8.0" layoutY="517.0" mnemonicParsing="false" onAction="#adminPanel" prefHeight="25.0" prefWidth="130.0" text="Add Admin" visible="false" />
+            </children>
+        </Pane>
+
+
+
+        <Pane layoutY="22.0" prefHeight="47.0" prefWidth="990.0" style="-fx-border-color: #202142;-fx-background-color: #ffff;">
+            <children>
+                <Label layoutX="386.0" layoutY="14.0" text="P45 EVOTING SYSTEM Admin">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            </children>
+        </Pane>
+
+        <Pane fx:id="homePanel" layoutX="148.0" layoutY="106.0" prefHeight="313.0" prefWidth="827.0" style="-fx-background-color: #ffff; " visible="false">
+            <children>
+                <PieChart fx:id="chart3" layoutX="604.0" layoutY="74.0" prefHeight="157.0" prefWidth="200.0" />
+                <LineChart fx:id="chart2" layoutX="296.0" layoutY="66.0" prefHeight="182.0" prefWidth="268.0">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </LineChart>
+                <BarChart fx:id="chart1" layoutX="24.0" layoutY="65.0" prefHeight="182.0" prefWidth="240.0">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </BarChart>
+            </children>
+        </Pane>
+
+        <Pane fx:id="partyPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;-fx-background-radius: 17;" visible="false">
+            <children>
+                <TextField fx:id="partyName" layoutX="162.0" layoutY="79.0" prefHeight="25.0" prefWidth="370.0" promptText="Party Name" />
+                <TextField fx:id="abbviation" layoutX="163.0" layoutY="132.0" prefHeight="25.0" prefWidth="370.0" promptText="Abbreviation" />
+                <Button fx:id="addPartyBtn" layoutX="321.0" layoutY="267.0" mnemonicParsing="false" onAction="#addParty" text="Add Party" />
+                <Label fx:id="newParty" layoutX="333.0" layoutY="32.0" text="New Party" />
+                <Button layoutX="162.0" layoutY="186.0" mnemonicParsing="false" onAction="#openFileExplore" prefHeight="25.0" prefWidth="370.0" text="flag" />
+                <Button layoutX="94.0" layoutY="14.0" mnemonicParsing="false" onAction="#editParty" text="Edit" />
+                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#party" text="New Party" />
+            <Button layoutX="144.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewParties" text="View" />
+            </children>
+        </Pane>
+
+        <Pane fx:id="updatePanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;-fx-background-radius: 17;" visible="false">
+            <children>
+                <TextField fx:id="updatePartyName" layoutX="162.0" layoutY="79.0" prefHeight="25.0" prefWidth="370.0" promptText="Party Name" />
+                <TextField fx:id="updateAbbviation" layoutX="163.0" layoutY="132.0" prefHeight="25.0" prefWidth="370.0" promptText="Abbreviation" />
+                <Button layoutX="391.0" layoutY="267.0" mnemonicParsing="false" onAction="#updateParty" text="Update Party" />
+                <Label layoutX="333.0" layoutY="32.0" text="Update Party" />
+                <Button layoutX="162.0" layoutY="186.0" mnemonicParsing="false" onAction="#openFileExplore" prefHeight="25.0" prefWidth="370.0" text="flag" />
+                <Button layoutX="94.0" layoutY="14.0" mnemonicParsing="false" onAction="#editParty" text="Edit" />
+                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#party" text="New Party" />
+                <Button layoutX="281.0" layoutY="267.0" mnemonicParsing="false" onAction="#party" text="Cancel" />
+            </children>
+        </Pane>
+
+        <Pane fx:id="viewParty" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;-fx-background-radius: 17;" visible="false">
+            <children>
+                <Label layoutX="333.0" layoutY="32.0" text="View Party" />
+                <Button layoutX="94.0" layoutY="14.0" mnemonicParsing="false" onAction="#editParty" text="Edit" />
+                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="New Party" />
+            <Button layoutX="138.0" layoutY="14.0" mnemonicParsing="false" text="View" />
+            <ListView fx:id="myListView" layoutX="27.0" layoutY="67.0" prefHeight="230.0" prefWidth="643.0" />
+            </children>
+        </Pane>
+
+
+        <Pane fx:id="partyEditPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff; -fx-background-radius: 17;" visible="false">
+            <children>
+                <TextField fx:id="partyAbreviation" layoutX="163.0" layoutY="96.0" prefHeight="25.0" prefWidth="370.0" promptText="Party Abbreviation" />
+                <TextField fx:id="partyEditName" layoutX="163.0" layoutY="157.0" prefHeight="25.0" prefWidth="370.0" promptText="Party Name" visible="false" />
+                <Button fx:id="updatePartyBtn" layoutX="375.0" layoutY="263.0" mnemonicParsing="false" onAction="#requestPartyUpdate" text="Update Party" visible="false" />
+                <Label fx:id="editParty" layoutX="333.0" layoutY="32.0" text="Edit Party" />
+                <Button layoutX="94.0" layoutY="14.0" mnemonicParsing="false" text="Edit" />
+                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#party" text="New Party" />
+                <Button layoutX="551.0" layoutY="96.0" mnemonicParsing="false" onAction="#fetchParty">
+                    <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="22.0" onMouseClicked="#fetchParty" onMousePressed="#fetchParty" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@util/search.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="deleteParty" layoutX="262.0" layoutY="263.0" mnemonicParsing="false" onAction="#deleteParty" text="Delete Party" visible="false" />
+            </children>
+        </Pane>
+
+        <!-- New location    -->
+        <Pane fx:id="locationPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff; -fx-background-radius: 17;" visible="false">
+            <children>
+                <TextField fx:id="locationName" layoutX="163.0" layoutY="92.0" prefHeight="25.0" prefWidth="370.0" promptText="location Name" />
+                <TextField fx:id="locationType" layoutX="163.0" layoutY="138.0" prefHeight="25.0" prefWidth="370.0" promptText="location Type" />
+                <TextField fx:id="parentLocation" layoutX="163.0" layoutY="187.0" prefHeight="25.0" prefWidth="370.0" promptText="parent location" />
+                <Button fx:id="addLocationBtn" layoutX="300.0" layoutY="266.0" mnemonicParsing="false" text="Add a Location" />
+                <Label fx:id="newLocation" layoutX="312.0" layoutY="45.0" text="New Location" />
+            </children>
+        </Pane>
+
+        <!-- New voter    -->
+        <Pane fx:id="voterPanel" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff; -fx-background-radius: 17;" visible="false">
+            <children>
+                <TextField fx:id="voterName" layoutX="163.0" layoutY="66.0" prefHeight="25.0" prefWidth="370.0" promptText="Name" />
+                <TextField fx:id="lastName" layoutX="163.0" layoutY="113.0" prefHeight="25.0" prefWidth="370.0" promptText="Last Name" />
+                <TextField fx:id="idNumber" layoutX="163.0" layoutY="158.0" prefHeight="25.0" prefWidth="370.0" promptText="ID Number" />
+                <Label fx:id="newVoter" layoutX="320.0" layoutY="14.0" text="New Voter" />
+                <Button fx:id="addVoterBtn" layoutX="327.0" layoutY="274.0" mnemonicParsing="false" onAction="#createNewVoter" text="Add a Voter" />
+                <TextField fx:id="phoneNumber" layoutX="163.0" layoutY="203.0" prefHeight="25.0" prefWidth="370.0" promptText="Phone Number" />
+                <Button layoutX="341.0" layoutY="237.0" mnemonicParsing="false" onAction="#openWebCamCapture" text="Picture" />
+            </children>
+        </Pane>
+
+        <!-- New Admin    -->
+        <Pane fx:id="adminPane" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff; -fx-background-radius: 17;" visible="false">
+            <children>
+                <TextField fx:id="adminName" layoutX="163.0" layoutY="66.0" prefHeight="25.0" prefWidth="370.0" promptText="Name" />
+                <TextField fx:id="adminemail" layoutX="163.0" layoutY="113.0" prefHeight="25.0" prefWidth="370.0" promptText="Email" />
+                <TextField fx:id="adminpassword" layoutX="163.0" layoutY="158.0" prefHeight="25.0" prefWidth="370.0" promptText="Password" />
+                <Label layoutX="320.0" layoutY="14.0" text="New Admin" />
+                <Button fx:id="addAdminBtn" layoutX="327.0" layoutY="274.0" mnemonicParsing="false" onAction="#createAdmin" text="Add Admin" />
+            <TextField fx:id="adminRole" layoutX="163.0" layoutY="201.0" prefHeight="25.0" prefWidth="370.0" promptText="Role" />
+            <Button layoutX="32.0" layoutY="19.0" mnemonicParsing="false" onAction="#adminList" text="View Admins" />
+            </children>
+        </Pane>
+
+        <Pane fx:id="adminTable" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;" visible="false">
+            <children>
+                <ListView fx:id="adminListView" layoutX="33.0" layoutY="42.0" prefHeight="230.0" prefWidth="637.0" />
+                <Label alignment="CENTER" layoutX="290.0" layoutY="14.0" prefHeight="17.0" prefWidth="144.0" text="All the Administrator">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            </children>
+        </Pane>
+
+        <Pane fx:id="resultTable" layoutX="170.0" layoutY="106.0" prefHeight="313.0" prefWidth="696.0" style="-fx-background-color: #ffff;" visible="false">
+         <children>
+            <ListView fx:id="resultListView" layoutX="33.0" layoutY="42.0" prefHeight="230.0" prefWidth="637.0" />
+            <Label alignment="CENTER" layoutX="296.0" layoutY="14.0" prefHeight="17.0" prefWidth="144.0" text="Temporary Results" />
+         </children>
+        </Pane>
+
+        <Pane fx:id="loginPane" layoutX="355.0" layoutY="174.0" prefHeight="313.0" prefWidth="268.0" style="-fx-background-color: black; -fx-background-radius: 17;" visible="true">
+            <children>
+                <Button layoutX="193.0" layoutY="248.0" mnemonicParsing="false" onAction="#logIn" style="-fx-border-color: #ffff; -fx-background-color: #F53022; -fx-background-radius: 15;" text="Login" textFill="#f8f4f4">
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font></Button>
+                <TextField fx:id="email" layoutX="28.0" layoutY="99.0" prefHeight="25.0" prefWidth="217.0" promptText="email" />
+                <Label layoutX="52.0" layoutY="14.0" text="Authentication" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font></Label>
+            <PasswordField fx:id="passwordPassword" layoutX="26.0" layoutY="157.0" prefHeight="25.0" prefWidth="217.0" promptText="Password" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="26.0" layoutY="248.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #fcbb31;" width="50.0" />
+            <Label layoutX="42.0" layoutY="253.0" onMouseClicked="#closeButtonAction" text="Exit" textFill="WHITE" underline="true">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Label>
+            <Pane layoutX="77.0" layoutY="57.0" prefHeight="8.0" prefWidth="114.0" style="-fx-background-color: #76ff03;" />
+            </children>
+        </Pane>
+
+        <Pane fx:id="notificationPanel" layoutX="311.0" layoutY="151.0" prefHeight="173.0" prefWidth="390.0" style="-fx-background-color: #ffff;-fx-background-radius: 17; -fx-background-position: center;" visible="false">
+            <children>
+                <Button fx:id="notificationBTN" layoutX="183.0" layoutY="124.0" mnemonicParsing="false" onAction="#removeNotificationPanel" text="Ok" />
+                <Label fx:id="notificationText" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="39.0" prefHeight="17.0" prefWidth="363.0" text="       Attention Error!!" textAlignment="JUSTIFY" wrapText="true" />
+                <Label fx:id="notificationContent" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="78.0" prefWidth="363.0" />
+            </children>
+        </Pane>
+
+
+
+    </children>
+</AnchorPane>

@@ -1,5 +1,7 @@
 package sample.domain.user;
 
+import java.util.Arrays;
+
 public class Party {
     private String id;
     private String name;
@@ -46,5 +48,10 @@ public class Party {
 
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
+    }
+
+    @Override
+    public String toString() {
+        return   name + "  (" + abbreviation +")";
     }
 }
